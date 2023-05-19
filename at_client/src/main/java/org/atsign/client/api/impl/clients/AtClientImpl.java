@@ -686,10 +686,13 @@ public class AtClientImpl implements AtClient {
     }
 
     private String _put(SelfKey selfKey, byte[] value) throws AtException {
+        
+        // 1. generate dataSignature
         String stringValue = new String(value);
 
         selfKey.metadata.dataSignature = generateSignatureByte(value);
-
+        
+        // 2. encrypt data with self encryption key
         String cipherText;
         try {
             cipherText = EncryptionUtil.aesEncryptToBase64(stringValue, keys.get(KeysUtil.selfEncryptionKeyName));
@@ -697,7 +700,8 @@ public class AtClientImpl implements AtClient {
                 | InvalidKeyException | IllegalBlockSizeException | BadPaddingException | NoSuchProviderException e) {
             throw new AtEncryptionException("Failed to encrypt value with self encryption key", e);
         }
-
+        
+        // 3. update secondary
         UpdateVerbBuilder builder = new UpdateVerbBuilder();
         builder.with(selfKey, cipherText);
         String command = builder.build();
