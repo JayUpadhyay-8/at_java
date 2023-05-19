@@ -7,6 +7,7 @@ import org.atsign.common.Keys.SharedKey;
 
 public class TemporaryTestForByteAtClientOperation{
     public static void main(String[] args) throws Exception {
+        // Add your atSign Here
         AtSign atSign = new AtSign("@16ourfeminist");
         AtClient atClient = AtClient.withRemoteSecondary("root.atsign.org:64", atSign, true);
 
