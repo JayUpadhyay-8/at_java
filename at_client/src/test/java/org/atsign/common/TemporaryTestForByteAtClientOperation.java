@@ -17,7 +17,10 @@ public class TemporaryTestForByteAtClientOperation{
         byte[] getPublicValue = atClient.getBinary(pk).get();
         String str = new String(getPublicValue);
         System.out.println("get public key -- " + str + " get public value -- " + getPublicValue);
-
+        
+        System.out.println();
+        System.out.println();
+        
         SelfKey sk = new KeyBuilders.SelfKeyBuilder(atSign).key("testSelfKey").build();
         String responseSK = atClient.put(sk, value).get();
         System.out.println("response of Self here -- " + responseSK);
