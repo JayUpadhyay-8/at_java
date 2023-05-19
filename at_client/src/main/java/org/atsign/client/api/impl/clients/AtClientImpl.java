@@ -659,12 +659,16 @@ public class AtClientImpl implements AtClient {
     }
 
     private String _put(SharedKey sharedKey, byte[] value) throws AtException {
+       
+        // 1. generate dataSignature
         String stringValue = new String(value);
         if (!this.atSign.equals(sharedKey.sharedBy)) {
             throw new AtIllegalArgumentException(
                     "sharedBy is [" + sharedKey.sharedBy + "] but should be this client's atSign [" + atSign + "]");
         }
         String what = "";
+        
+        // 2. encrypt data with shared encryption key
         String cipherText;
         try {
             what = "fetch/create shared encryption key";
@@ -676,6 +680,7 @@ public class AtClientImpl implements AtClient {
             throw new AtEncryptionException("Failed to " + what, e);
         }
 
+        // 3. update secondary
         String command = "update" + sharedKey.metadata.toString() + ":" + sharedKey + " " + cipherText;
 
         try {
