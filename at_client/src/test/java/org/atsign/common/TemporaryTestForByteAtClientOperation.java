@@ -23,7 +23,7 @@ public class TemporaryTestForByteAtClientOperation{
         System.out.println("response of Self here -- " + responseSK);
         
         SharedKey shKey = new KeyBuilders.SharedKeyBuilder(atSign, atSign).key("testSharedKey").build();
-        String responseShareKey = atClient.put(shKey).get();
+        String responseShareKey = atClient.put(shKey,value).get();
         System.out.println("response of SharedKey here -- " + responseShareKey);
     }
 
