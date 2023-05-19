@@ -572,25 +572,30 @@ public class AtClientImpl implements AtClient {
     }
 
     private byte[] _getBinary(SelfKey selfKey) throws AtException {
+        
+        // 1. build command
         String command;
         LlookupVerbBuilder builder = new LlookupVerbBuilder();
         builder.with(selfKey, LlookupVerbBuilder.Type.ALL);
         command = builder.build();
-
+        
+        // 2. execute command
         Response response;
         try {
             response = secondary.executeCommand(command, true);
         } catch (IOException e) {
             throw new AtSecondaryConnectException("Failed to execute " + command, e);
         }
-
+        
+        // 3. transform the data to a LlookupAllResponse object
         LookupResponse fetched;
         try {
             fetched = json.readValue(response.getRawDataResponse(), LookupResponse.class);
         } catch (JsonProcessingException e) {
             throw new AtResponseHandlingException("Failed to parse JSON " + response.getRawDataResponse(), e);
         }
-
+        
+        // 4. decrypt the value
         String decryptedValue;
         String encryptedValue = fetched.data;
         String selfEncryptionKey = keys.get(KeysUtil.selfEncryptionKeyName);
@@ -600,7 +605,8 @@ public class AtClientImpl implements AtClient {
                 | InvalidKeyException | IllegalBlockSizeException | BadPaddingException | NoSuchProviderException e) {
             throw new AtDecryptionException("Failed to " + command, e);
         }
-
+        
+        // 5. update metadata. squash the fetchedMetadata with current key.metadata
         selfKey.metadata = Metadata.squash(fetched.metaData, selfKey.metadata);
 
         return decryptedValue.getBytes();
