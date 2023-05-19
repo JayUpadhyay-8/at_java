@@ -21,6 +21,9 @@ public class TemporaryTestForByteAtClientOperation{
         SelfKey sk = new KeyBuilders.SelfKeyBuilder(atSign).key("testSelfKey").build();
         String responseSK = atClient.put(sk, value).get();
         System.out.println("response of Self here -- " + responseSK);
+        byte[] getSelfValue = atClient.getBinary(sk).get();
+        String strSelf = new String(getSelfValue);
+        System.out.println("get Self key -- " + strSelf + " get Self value -- " + getSelfValue);
         
         SharedKey shKey = new KeyBuilders.SharedKeyBuilder(atSign, atSign).key("testSharedKey").build();
         String responseShareKey = atClient.put(shKey,value).get();
