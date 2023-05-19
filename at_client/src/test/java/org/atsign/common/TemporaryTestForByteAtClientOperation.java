@@ -18,6 +18,11 @@ public class TemporaryTestForByteAtClientOperation{
         String str = new String(getPublicValue);
         System.out.println("get public key -- " + str + " get public value -- " + getPublicValue);
 
+        SelfKey sk = new KeyBuilders.SelfKeyBuilder(atSign).key("testSelfKey").build();
+        String responseSK = atClient.put(sk, value).get();
+        System.out.println("response of Self here -- " + responseSK);
+        
+
     }
 
 }
