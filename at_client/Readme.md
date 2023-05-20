@@ -27,7 +27,7 @@
 
 2.	 After completing the Setting Up Your Development Environment phase, follow the instructions for the Registration CLI on the same page. 
 
-     - Imp: Don’t use this one which is given in the website.
+     - Important: Don’t use this one which is given in the website.
 
       <img src="Register Code.png">
 
@@ -38,7 +38,7 @@
 
 
 
-After all this You are all set. Your key will be in this " C:\Users\User_name \.atsign\keys " location on your System.
+      After all this You are all set. Your key will be in this " C:\Users\User_name \.atsign\keys " location on your System.
 
 
 **Build and Run:**
