@@ -20,4 +20,4 @@ Setup:
      https://docs.atsign.com/start/
 
     - When you click the link on the left, you will see options like these
-     ![image](https://github.com/JayUpadhyay-8/at_java/assets/52772566/fcca482a-adb4-4815-bef3-9269b9927794)
+     ![image][url=https://postimg.cc/9w9dknTd][img]https://i.postimg.cc/9w9dknTd/Picture1.png[/img][/url]
