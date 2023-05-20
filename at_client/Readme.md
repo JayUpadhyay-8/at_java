@@ -20,4 +20,4 @@ Setup:
      https://docs.atsign.com/start/
 
     - When you click the link on the left, you will see options like these
-     ![image]([https://postimg.cc/9w9dknTd])
+     ![image](https://postimg.cc/9w9dknTd)
